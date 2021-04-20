@@ -3,10 +3,11 @@ def solution(dartResult):
     score = list(range(11))
     bonus = ['S', 'D', 'T']
     option = ['*', '#']
-    # for letter in dartResult:
-    #     if 
-    lista= '1**2+3'
-    print(int(lista))
+    for num in range(len(dartResult)):
+        if dartResult[num] in score:
+             pass
+        if dartResult[num] in bonus:
+            
     return answer
 
 print(solution('1S2D*3T'))
