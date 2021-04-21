@@ -7,7 +7,7 @@ def solution(n):
             third += str(1)
         elif a == 2:
             third += str(2)
-        elif a == 0:
+        elif a == 3:
             third += str(4)
         n = n//4
     third.reverse()
