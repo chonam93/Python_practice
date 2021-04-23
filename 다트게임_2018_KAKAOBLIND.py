@@ -103,8 +103,8 @@
 def solution(dartResult):
     point = []
     answer = []
-    dartResult = dartResult.replace('10','k')
-    point = ['10' if i == 'k' else i for i in dartResult]
+    dartResult = dartResult.replace('10','k') ##문자열을 리스트로 만들 때, 두글자인채로 변환하고 싶을 때 먼저 치환해주고,
+    point = ['10' if i == 'k' else i for i in dartResult] ##list comprehension의 IF문으로 다시 바꿔주면 된다. HONEY TIP
     print(point)
 
     i = -1
