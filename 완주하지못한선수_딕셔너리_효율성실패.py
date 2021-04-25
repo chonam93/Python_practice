@@ -8,4 +8,4 @@ def solution(participant, completion):
             completion.remove(new_dic[i])
     return participant
 
-print(solution(["leo", "kiki", "eden"],["eden", "kiki", 'kiki']))
+print(solution(["leo", "kiki", "eden", 'kiki'],["eden", "kiki", 'kiki']))
