@@ -8,5 +8,5 @@ def solution(arr1, arr2):
                 a= arr1[i][j]*arr2[j][m]
                 print(a)
                 answer_list.append(arr1[i][j]*arr2[j][m])
-            answer.append(sum(answer_list))7
+            answer.append(sum(answer_list))
     return answer

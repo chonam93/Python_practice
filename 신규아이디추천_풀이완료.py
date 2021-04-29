@@ -13,9 +13,9 @@
 def solution(new_id):
     answer = ''
     new_id = new_id.lower()
-    special = ['-', '.', '_']
+    option = ['-', '.', '_']
     for i in new_id:
-        if i.isalpha() == True or i.isdigit() == True or i in special:
+        if i.isalpha() == True or i.isdigit() == True or i in option:
             answer += i    
     while '..' in answer:
         answer = answer.replace('..', '.')
