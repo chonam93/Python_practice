@@ -51,7 +51,7 @@ def solution(N, stages):
     return result
 
 ##프로그래머스 다른 풀이
-def solution(N, stages):
+#def solution(N, stages):
     fail = {}
     for i in range(1,N+1): 
         try:
