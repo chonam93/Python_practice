@@ -12,8 +12,9 @@ def solution(s, n):
             answer += i
         if i == ' ':
             answer += ' '
-        answer = ''.join(answer)
+            
     return answer
 
-print(solution('a  b', 1))
+print(solution("AB", 1))
 
+    

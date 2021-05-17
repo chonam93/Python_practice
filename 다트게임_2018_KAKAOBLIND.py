@@ -31,107 +31,91 @@
 # 7	    1D2S3T*	        59	    1^2 + 2^1 * 2 + 3^3 * 2
 
 
-# def solution(dartResult):
-#     answer = 0
-#     answer_list = []
-#     len_dart = len(dartResult)
-#     i = 0
-#     while i < len_dart:
-#         for text in dartResult:
-#             if text ==  'S':
-#                 slice_dart = dartResult[:dartResult.index(text)]
-#                 answer_list.append(int(slice_dart))
-#                 dartResult = dartResult[dartResult.index(text)+1:]
-#             elif text == 'D':
-#                 slice_dart = dartResult[:dartResult.index(text)]
-#                 answer_list.append(int(slice_dart)**2)
-#                 dartResult = dartResult[dartResult.index(text)+1:]
-#             elif text == 'T':
-#                 slice_dart = dartResult[:dartResult.index(text)]
-#                 answer_list.append(int(slice_dart)**3)
-#                 dartResult = dartResult[dartResult.index(text)+1:]
-#             elif text == '*':
-#                 dartResult = dartResult[dartResult.index(text)+1:]
-#                 if len(answer_list) == 1:
-#                     answer_list[0] = answer_list[0]*2
-#                 elif len(answer_list) == 2:
-#                     answer_list[0] = answer_list[0]*2
-#                     answer_list[1] = answer_list[1]*2
-#                 elif len(answer_list) == 3:
-#                     answer_list[1] = answer_list[1]*2
-#                     answer_list[2] = answer_list[2]*2
-#             elif text == '#':
-#                 dartResult = dartResult[dartResult.index(text)+1:]
-#                 if len(answer_list) == 1:
-#                     answer_list[0] = answer_list[0]*-1
-#                 elif len(answer_list) == 2:
-
-#                     answer_list[1] = answer_list[1]*-1
-#                 elif len(answer_list) == 3:
-
-#                     answer_list[2] = answer_list[2]*-1
-#             i += 1
-#     answer = sum(answer_list)
-                
-
-                
-
-            
-#     return answer
-
-import re
 def solution(dartResult):
-    bonus = {'S' : 1, 'D' : 2, 'T' : 3}
-    option = {'' : 1, '*' : 2, '#' : -1}
-    p = re.compile('(\d+)([SDT])([*#]?)')
-    a = p.findall(dartResult)
-    print(a)
-
-
+    answer = 0
+    answer_list = []
+    len_dart = len(dartResult)
+    i = 0
+    while i < len_dart: # i를 1씩 더해가며 진행할 예정
+        for text in dartResult: # 숫자는 건너뛰고 텍스트 하나씩 조건문 대입
+            if text ==  'S':
+                slice_dart = dartResult[:dartResult.index(text)] # 해당 텍스트까지 슬라이스로 잘라낸다
+                answer_list.append(int(slice_dart)) # answer_list에 S이므로 그냥 추가
+                dartResult = dartResult[dartResult.index(text)+1:] # dartResult에서 slice_dart를 빼주고 다시 설정
+            elif text == 'D':
+                slice_dart = dartResult[:dartResult.index(text)] 
+                answer_list.append(int(slice_dart)**2) # answer_list에 제곱해주고 추가
+                dartResult = dartResult[dartResult.index(text)+1:]
+            elif text == 'T':
+                slice_dart = dartResult[:dartResult.index(text)]
+                answer_list.append(int(slice_dart)**3) # 세제곱해주고 추가
+                dartResult = dartResult[dartResult.index(text)+1:]
+            elif text == '*':
+                dartResult = dartResult[dartResult.index(text)+1:]
+                if len(answer_list) == 1: # *의 경우 자신과 바로 앞의 번호를 2배 해주므로 answer_list에 몇개가 들어 있는지 확인하는 절차 거쳐야한다
+                    answer_list[0] = answer_list[0]*2
+                elif len(answer_list) == 2:
+                    answer_list[0] = answer_list[0]*2
+                    answer_list[1] = answer_list[1]*2
+                elif len(answer_list) == 3:
+                    answer_list[1] = answer_list[1]*2
+                    answer_list[2] = answer_list[2]*2
+            elif text == '#': # #은 자신만 -이므로 본인이 해당하는 값에 -곱해준다
+                dartResult = dartResult[dartResult.index(text)+1:]
+                if len(answer_list) == 1:
+                    answer_list[0] = answer_list[0]*-1
+                elif len(answer_list) == 2:
+                    answer_list[1] = answer_list[1]*-1
+                elif len(answer_list) == 3:
+                    answer_list[2] = answer_list[2]*-1
+            i += 1
+    answer = sum(answer_list) # 마지막으로 answer_list 합
+                
+    return answer
 
 print(solution('1D2S#10S'))
 
 
 
 # ## re / compile 사용
-# import re
+import re
 
-# def solution(dartResult):
-#     bonus = {'S' : 1, 'D' : 2, 'T' : 3}
-#     option = {'' : 1, '*' : 2, '#' : -1}
-#     p = re.compile('(\d+)([SDT])([*#]?)')
-#     dart = p.findall(dartResult)
-#     for i in range(len(dart)):
-#         if dart[i][2] == '*' and i > 0:
-#             dart[i-1] *= 2
-#         dart[i] = int(dart[i][0]) ** bonus[dart[i][1]] * option[dart[i][2]]
+def solution(dartResult):
+    bonus = {'S' : 1, 'D' : 2, 'T' : 3}
+    option = {'' : 1, '*' : 2, '#' : -1}
+    p = re.compile('(\d+)([SDT])([*#]?)')
+    dart = p.findall(dartResult)
+    for i in range(len(dart)):
+        if dart[i][2] == '*' and i > 0:
+            dart[i-1] *= 2
+        dart[i] = int(dart[i][0]) ** bonus[dart[i][1]] * option[dart[i][2]]
 
-#     answer = sum(dart)
-#     return answer
+    answer = sum(dart)
+    return answer
 
 
 
-# def solution(dartResult):
-#     point = []
-#     answer = []
-#     dartResult = dartResult.replace('10','k') ##문자열을 리스트로 만들 때, 두글자인채로 변환하고 싶을 때 먼저 치환해주고,
-#     point = ['10' if i == 'k' else i for i in dartResult] ##list comprehension의 IF문으로 다시 바꿔주면 된다. HONEY TIP
-#     print(point)
+def solution(dartResult):
+    point = []
+    answer = []
+    dartResult = dartResult.replace('10','k') ##문자열을 리스트로 만들 때, 두글자인채로 변환하고 싶을 때 먼저 치환해주고,
+    point = ['10' if i == 'k' else i for i in dartResult] ##list comprehension의 IF문으로 다시 바꿔주면 된다. HONEY TIP
+    print(point)
 
-#     i = -1
-#     sdt = ['S', 'D', 'T']
-#     for j in point:
-#         if j in sdt :
-#             answer[i] = answer[i] ** (sdt.index(j)+1)
-#         elif j == '*':
-#             answer[i] = answer[i] * 2
-#             if i != 0 :
-#                 answer[i - 1] = answer[i - 1] * 2
-#         elif j == '#':
-#             answer[i] = answer[i] * (-1)
-#         else:
-#             answer.append(int(j))
-#             i += 1
-#     return sum(answer)
+    i = -1
+    sdt = ['S', 'D', 'T']
+    for j in point:
+        if j in sdt :
+            answer[i] = answer[i] ** (sdt.index(j)+1)
+        elif j == '*':
+            answer[i] = answer[i] * 2
+            if i != 0 :
+                answer[i - 1] = answer[i - 1] * 2
+        elif j == '#':
+            answer[i] = answer[i] * (-1)
+        else:
+            answer.append(int(j))
+            i += 1
+    return sum(answer)
 
 
